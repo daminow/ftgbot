@@ -1,0 +1,13 @@
+[Unit]
+Description=Frontend Telegram Bot
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/frontendtgbot
+ExecStart=/root/frontendtgbot/venv/bin/python /root/frontendtgbot/main.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
