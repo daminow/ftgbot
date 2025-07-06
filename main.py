@@ -8,6 +8,7 @@ import threading
 import asyncio
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
+from dotenv import load_dotenv
 
 from telegram import (
     Update,
@@ -27,15 +28,17 @@ from telegram.ext import (
     filters,
 )
 
-# ========= Конфигурация =========
-TOKEN = "7501357038:AAFAonBpoHeZ2GxmOr7noPtP7VYMbehfmkE"
-FRONTEND_CHAT_ID = -1002609344415  # основной чат
-ADMIN_GROUP_ID   = -1002609344415  # чат администраторов
-BOT_THREAD_ID    = 98              # тема для команд
-LOGS_THREAD_ID   = 88              # тема для логов
-DATABASE_URL     = "postgresql://frontendtgbot_db_admin:1509@localhost/frontendtgbot_db"
-SCHEMA           = "my_schema"
+# ========= Загрузка .env =========
+load_dotenv()
 
+# ========= Конфигурация =========
+TOKEN            = os.getenv("BOT_TOKEN")
+FRONTEND_CHAT_ID = int(os.getenv("FRONTEND_CHAT_ID"))
+ADMIN_GROUP_ID   = int(os.getenv("ADMIN_GROUP_ID"))
+BOT_THREAD_ID    = int(os.getenv("BOT_THREAD_ID"))
+LOGS_THREAD_ID   = int(os.getenv("LOGS_THREAD_ID"))
+DATABASE_URL     = os.getenv("DATABASE_URL")
+SCHEMA           = os.getenv("SCHEMA")
 # ========= Логирование =========
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
